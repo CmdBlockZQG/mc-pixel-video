@@ -1,0 +1,3 @@
+gamerule maxCommandChainLength 2147483647
+
+function pixel-video:frame_init
