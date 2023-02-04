@@ -5,29 +5,30 @@
 #include "mc_pixel_video.h"
 
 int main() {
-	// video.mp4 -> orig_video(×ªÂëµÄÊÓÆµ) orig_color(Ô­ÊÓÆµËùÓĞµÄÑÕÉ«)
-	std::cout << "1: ÊÓÆµ×ªÂë & ÑÕÉ«·ÖÎö" << std::endl;
-	// orig_color blocks(¿ÉÓÃµÄ·½¿éid) -> color_map(Ô­ÑÕÉ«ºÍÄ¿±êÑÕÉ«¶ÔÓ¦¹ØÏµ) texture_map(Ä¿±êÑÕÉ«ºÍ·½¿éµÄ¶ÔÓ¦, ÎÄ±¾)
-	std::cout << "2: ¼ÆËãÑÕÉ«Ó³Éä" << std::endl;
+	// video.mp4 -> orig_video(è½¬ç çš„è§†é¢‘) orig_color(åŸè§†é¢‘æ‰€æœ‰çš„é¢œè‰²)
+	std::cout << "1: è§†é¢‘è½¬ç  & é¢œè‰²åˆ†æ" << std::endl;
+	// orig_color blocks(å¯ç”¨çš„æ–¹å—id) -> color_map(åŸé¢œè‰²å’Œç›®æ ‡é¢œè‰²å¯¹åº”å…³ç³») texture_map(ç›®æ ‡é¢œè‰²å’Œæ–¹å—çš„å¯¹åº”, æ–‡æœ¬)
+	std::cout << "2: è®¡ç®—é¢œè‰²æ˜ å°„" << std::endl;
 	// video color_map -> mapped_video
-	std::cout << "3: Éú³ÉÓ³ÉäºóµÄÊÓÆµÊı¾İ" << std::endl;
+	std::cout << "3: ç”Ÿæˆæ˜ å°„åçš„è§†é¢‘æ•°æ®" << std::endl;
 	// mapped_video -> video_preview.mp4
-	std::cout << "4: Éú³ÉÔ¤ÀÀÊÓÆµ" << std::endl;
+	std::cout << "4: ç”Ÿæˆé¢„è§ˆè§†é¢‘" << std::endl;
 	// texture_map -> texture/
-	std::cout << "5: Éú³É²ÄÖÊ°ü" << std::endl;
+	std::cout << "5: ç”Ÿæˆæè´¨åŒ…" << std::endl;
 	// mapped_video texture_map -> datapack/ 
-	std::cout << "6: Éú³ÉÊı¾İ°ü(È«Ô­Ê¼)" << std::endl;
-	std::cout << "7: Éú³ÉÊı¾İ°ü(Ö¡¼äÔöÁ¿)" << std::endl;
-	std::cout << "8: Éú³ÉÊı¾İ°ü(Ö¡¼äÔöÁ¿+ĞĞÑ¹Ëõ)" << std::endl;
+	std::cout << "6: ç”Ÿæˆæ•°æ®åŒ…(å…¨åŸå§‹)" << std::endl;
+	std::cout << "7: ç”Ÿæˆæ•°æ®åŒ…(å¸§é—´å¢é‡)" << std::endl;
+	std::cout << "8: ç”Ÿæˆæ•°æ®åŒ…(å¸§é—´å¢é‡+è¡Œå‹ç¼©)" << std::endl;
+	std::cout << "9: ç”Ÿæˆrconæ’­æ”¾å™¨ä¸“ç”¨æ•°æ®åŒ…(å¸§é—´å¢é‡+è¡Œå‹ç¼©)" << std::endl;
 	int op;
 	std::cin >> op;
 	if (op == 1) {
 		std::string filename;
-		std::cout << "ÊÓÆµÎÄ¼şÃû£º";
+		std::cout << "è§†é¢‘æ–‡ä»¶åï¼š";
 		std::cin >> filename;
 
 		int w, h;
-		std::cout << "Ñ¹ËõºóÊÓÆµ¿í¸ß£¬¿Õ¸ñ¸ô¿ª£º";
+		std::cout << "å‹ç¼©åè§†é¢‘å®½é«˜ï¼Œç©ºæ ¼éš”å¼€ï¼š";
 		std::cin >> w >> h;
 
 		transcode_video(filename.c_str(), w, h);
@@ -37,7 +38,7 @@ int main() {
 		gen_mapped_video();
 	} else if (op == 4) {
 		double frame_rate;
-		std::cout << "Ö¡ÂÊ£º";
+		std::cout << "å¸§ç‡ï¼š";
 		std::cin >> frame_rate;
 		generate_preview_video(frame_rate);
 	} else if (op == 5) {
@@ -46,14 +47,16 @@ int main() {
 		gen_mcfunction();
 	} else if (op == 7) {
 		int delay_tick;
-		std::cout << "Á½Ö¡Ö®¼äÓÎÏ·¿ÌÊı£º";
+		std::cout << "ä¸¤å¸§ä¹‹é—´æ¸¸æˆåˆ»æ•°ï¼š";
 		std::cin >> delay_tick;
 		gen_better_mcfunction(delay_tick);
 	} else if (op == 8) {
 		int delay_tick;
-		std::cout << "Á½Ö¡Ö®¼äÓÎÏ·¿ÌÊı£º";
+		std::cout << "ä¸¤å¸§ä¹‹é—´æ¸¸æˆåˆ»æ•°ï¼š";
 		std::cin >> delay_tick;
 		gen_super_mcfunction(delay_tick);
+	} else if (op == 9) {
+		gen_player_mcfunction();
 	}
 	return 0;
 }

@@ -67,7 +67,7 @@ inline int color_dis(int x, int y) {
 }
 
 double kmean() {
-	std::vector<std::tuple<double, double, double, double>> cluster_avg; // ×ÜÈ¨Öµ R G B
+	std::vector<std::tuple<double, double, double, double>> cluster_avg; // æ€»æƒå€¼ R G B
 	cluster_avg.resize(target_color_count);
 
 	double loss_func = 0;
@@ -168,10 +168,10 @@ void gen_texture_map_file() {
 void calc_color_map() {
 	std::system("cls");
 
-	std::cout << "¶ÁÈ¡·½¿éºÍÑÕÉ«Êı¾İ...";
+	std::cout << "è¯»å–æ–¹å—å’Œé¢œè‰²æ•°æ®...";
 	read_blocks_file();
 	read_orig_color_file();
-	std::cout << "Íê³É" << std::endl;
+	std::cout << "å®Œæˆ" << std::endl;
 
 	std::random_shuffle(orig_color.begin(), orig_color.end());
 	for (int i = 0; i < target_color_count; ++i) {
@@ -179,21 +179,23 @@ void calc_color_map() {
 	}
 
 	double last_loss = 0, cur_loss;
-	for (int i = 1; i <= 100; ++i) {
+	for (int i = 1; i <= 200; ++i) {
 		cur_loss = kmean();
-		std::cout << "µÚ" << i << "´Îµü´ú£¬loss=" << std::fixed << std::setprecision(8) << cur_loss << std::endl;
+		std::cout << "ç¬¬" << i << "æ¬¡è¿­ä»£ï¼Œloss=" << std::fixed << std::setprecision(8) << cur_loss << std::endl;
 		if (abs(cur_loss - last_loss) < 0.01) {
-			std::cout << "ËğÊ§º¯ÊıÊÕÁ²£¬¾ÛÀàÍê³É" << std::endl;
-			break;
+			std::cout << "æŸå¤±å‡½æ•°æ”¶æ•›ï¼Œèšç±»å®Œæˆ" << std::endl;
+			goto kmeans_success;
 		}
 		last_loss = cur_loss;
 	}
+	std::cout << "200æ¬¡è¿­ä»£åæŸå¤±å‡½æ•°ä»æœªæ”¶æ•›ï¼Œè¯·å°è¯•å†æ¥ä¸€æ¬¡" << std::endl;
+	kmeans_success:;
 
-	std::cout << "±£´æÑÕÉ«Ó³ÉäÊı¾İ...";
+	std::cout << "ä¿å­˜é¢œè‰²æ˜ å°„æ•°æ®...";
 	gen_color_map_file();
-	std::cout << "Íê³É" << std::endl;
+	std::cout << "å®Œæˆ" << std::endl;
 
-	std::cout << "±£´æ·½¿éÓ³ÉäÊı¾İ...";
+	std::cout << "ä¿å­˜æ–¹å—æ˜ å°„æ•°æ®...";
 	gen_texture_map_file();
-	std::cout << "Íê³É" << std::endl;
+	std::cout << "å®Œæˆ" << std::endl;
 }

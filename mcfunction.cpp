@@ -48,7 +48,7 @@ void generate_frame_function() {
 
 	for (int k = 0; k < frame_count; ++k) {
 		std::system("cls");
-		std::cout << "Éú³ÉÖ¡£º" << k + 1 << "/" << frame_count << std::endl;
+		std::cout << "ç”Ÿæˆå¸§ï¼š" << k + 1 << "/" << frame_count << std::endl;
 
 		std::ofstream frame_func_file("mc-pixel-video-func/data/pixel-video/functions_" + std::to_string(k / chunk_size) + "/frame" + std::to_string(k) + ".mcfunction", std::ios::out);
 
@@ -68,7 +68,7 @@ void generate_frame_function() {
 		frame_func_file.close();
 	}
 
-	std::cout << "Éú³ÉÍê³É" << std::endl;
+	std::cout << "ç”Ÿæˆå®Œæˆ" << std::endl;
 }
 
 void generate_better_frame_function(int delay_tick) {
@@ -87,7 +87,7 @@ void generate_better_frame_function(int delay_tick) {
 
 	for (int k = 0; k < frame_count; ++k) {
 		std::system("cls");
-		std::cout << "Éú³ÉÖ¡£º" << k + 1 << "/" << frame_count << std::endl;
+		std::cout << "ç”Ÿæˆå¸§ï¼š" << k + 1 << "/" << frame_count << std::endl;
 
 		std::ofstream frame_func_file("mc-pixel-video-func/data/pixel-video/functions_better/frame" + std::to_string(k) + ".mcfunction", std::ios::out);
 
@@ -113,7 +113,7 @@ void generate_better_frame_function(int delay_tick) {
 		frame_func_file.close();
 	}
 
-	std::cout << "Éú³ÉÍê³É" << std::endl;
+	std::cout << "ç”Ÿæˆå®Œæˆ" << std::endl;
 }
 
 void generate_super_frame_function(int delay_tick) {
@@ -132,7 +132,7 @@ void generate_super_frame_function(int delay_tick) {
 
 	for (int k = 0; k < frame_count; ++k) {
 		std::system("cls");
-		std::cout << "Éú³ÉÖ¡£º" << k + 1 << "/" << frame_count << std::endl;
+		std::cout << "ç”Ÿæˆå¸§ï¼š" << k + 1 << "/" << frame_count << std::endl;
 
 		std::ofstream frame_func_file("mc-pixel-video-func/data/pixel-video/functions_super/frame" + std::to_string(k) + ".mcfunction", std::ios::out);
 
@@ -147,35 +147,35 @@ void generate_super_frame_function(int delay_tick) {
 				}
 
 				int cur_pixel_num = j * frame_width + i;
-				if (cur_color == last_frame[cur_pixel_num]) { // ÓëÉÏÒ»Ö¡µÄÏàÍ¬»á½Ø¶ÏÏß¶Î
+				if (cur_color == last_frame[cur_pixel_num]) { // ä¸Žä¸Šä¸€å¸§çš„ç›¸åŒä¼šæˆªæ–­çº¿æ®µ
 					if (last_i != -1) {
 						if (last_i == i + 1) {
 							frame_func_file << "setblock " << last_i << " " << j << " 0 " + color_block[last_color] << std::endl;
 						} else {
 							frame_func_file << "fill " << last_i << " " << j << " 0 " << i + 1 << " " << j << " 0 " << color_block[last_color] << std::endl;
 						}
-						last_i = -1; // Ã»ÓÐÏß¶ÎÍ·
+						last_i = -1; // æ²¡æœ‰çº¿æ®µå¤´
 					}
 					continue;
 				}
 				last_frame[cur_pixel_num] = cur_color;
-				// ÕâÀïµÄ·½¿é»á±»¸üÐÂ£¬¼ÆËãÏß¶Î
+				// è¿™é‡Œçš„æ–¹å—ä¼šè¢«æ›´æ–°ï¼Œè®¡ç®—çº¿æ®µ
 				if (last_i != -1) {
-					if (last_color != cur_color) { // ÑÕÉ«±ä»¯£¬Ïß¶Î¶Ï¿ª
+					if (last_color != cur_color) { // é¢œè‰²å˜åŒ–ï¼Œçº¿æ®µæ–­å¼€
 						if (last_i == i + 1) {
 							frame_func_file << "setblock " << last_i << " " << j << " 0 " + color_block[last_color] << std::endl;
 						} else {
 							frame_func_file << "fill " << last_i << " " << j << " 0 " << i + 1 << " " << j << " 0 " << color_block[last_color] << std::endl;
 						}
-						last_i = i; // ÐÂÏß¶Î´ÓÏÖÔÚ¿ªÊ¼
+						last_i = i; // æ–°çº¿æ®µä»ŽçŽ°åœ¨å¼€å§‹
 						last_color = cur_color;
-					} // ²»±ä ¾Í²»¹ÜÁË
-				} else { // Ã»ÓÐÏß¶ÎÍ·£¬µ±Ç°¾ÍÊÇÏß¶ÎÍ·
+					} // ä¸å˜ å°±ä¸ç®¡äº†
+				} else { // æ²¡æœ‰çº¿æ®µå¤´ï¼Œå½“å‰å°±æ˜¯çº¿æ®µå¤´
 					last_i = i;
 					last_color = cur_color;
 				}
 			}
-			if (last_i != -1) { // ÓÐÏß¶ÎÒ»Ö±µ½½áÎ²ÁË
+			if (last_i != -1) { // æœ‰çº¿æ®µä¸€ç›´åˆ°ç»“å°¾äº†
 				if (last_i == 0) {
 					frame_func_file << "setblock 0 " << j << " 0 " + color_block[last_color] << std::endl;
 				} else {
@@ -188,7 +188,69 @@ void generate_super_frame_function(int delay_tick) {
 		frame_func_file.close();
 	}
 
-	std::cout << "Éú³ÉÍê³É" << std::endl;
+	std::cout << "ç”Ÿæˆå®Œæˆ" << std::endl;
+}
+
+void generate_player_frame_function() {
+	std::ifstream video_file("mapped_video", std::ios::in | std::ios::binary);
+	video_file.read((char*)&frame_width, 4);
+	video_file.read((char*)&frame_height, 4);
+	video_file.read((char*)&frame_count, 4);
+	std::system("cls");
+	std::vector<int> last_frame(frame_height * frame_width, -1);
+	std::system("mkdir functions_player");
+	for (int k = 0; k < frame_count; ++k) {
+		std::system("cls");
+		std::cout << "ç”Ÿæˆå¸§ï¼š" << k + 1 << "/" << frame_count << std::endl;
+		std::ofstream frame_func_file("functions_player/frame" + std::to_string(k) + ".mcfunction", std::ios::out);
+		for (int j = frame_height - 1; j >= 0; --j) {
+			int last_i = -1, last_color = -1;
+			for (int i = frame_width - 1; i >= 0; --i) {
+				int cur_color = 0;
+				unsigned char t;
+				for (int k = 0; k < 3; ++k) {
+					video_file.read((char*)&t, 1);
+					cur_color = (cur_color << 8) | t;
+				}
+				int cur_pixel_num = j * frame_width + i;
+				if (cur_color == last_frame[cur_pixel_num]) {
+					if (last_i != -1) {
+						if (last_i == i + 1) {
+							frame_func_file << "/setblock " << last_i << " " << j << " 0 " + color_block[last_color] << std::endl;
+						} else {
+							frame_func_file << "/fill " << last_i << " " << j << " 0 " << i + 1 << " " << j << " 0 " << color_block[last_color] << std::endl;
+						}
+						last_i = -1;
+					}
+					continue;
+				}
+				last_frame[cur_pixel_num] = cur_color;
+				if (last_i != -1) {
+					if (last_color != cur_color) {
+						if (last_i == i + 1) {
+							frame_func_file << "/setblock " << last_i << " " << j << " 0 " + color_block[last_color] << std::endl;
+						} else {
+							frame_func_file << "/fill " << last_i << " " << j << " 0 " << i + 1 << " " << j << " 0 " << color_block[last_color] << std::endl;
+						}
+						last_i = i;
+						last_color = cur_color;
+					}
+				} else {
+					last_i = i;
+					last_color = cur_color;
+				}
+			}
+			if (last_i != -1) {
+				if (last_i == 0) {
+					frame_func_file << "/setblock 0 " << j << " 0 " + color_block[last_color] << std::endl;
+				} else {
+					frame_func_file << "/fill " << last_i << " " << j << " 0 0 " << j << " 0 " << color_block[last_color] << std::endl;
+				}
+			}
+		}
+		frame_func_file.close();
+	}
+	std::cout << "ç”Ÿæˆå®Œæˆ" << std::endl;
 }
 
 void gen_mcfunction() {
@@ -204,4 +266,9 @@ void gen_better_mcfunction(int delay_tick) {
 void gen_super_mcfunction(int delay_tick) {
 	read_texture_map();
 	generate_super_frame_function(delay_tick);
+}
+
+void gen_player_mcfunction() {
+	read_texture_map();
+	generate_player_frame_function();
 }
